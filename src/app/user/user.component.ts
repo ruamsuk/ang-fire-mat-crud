@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { UserService } from '../services/user.service';
 import { HotToastService } from '@ngneat/hot-toast';
 
