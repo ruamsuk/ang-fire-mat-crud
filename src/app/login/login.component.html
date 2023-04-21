@@ -1,0 +1,33 @@
+<div class="form-container margin-top mat-elevation-z5">
+  <h1>Login</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="submit()">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Email address"
+        formControlName="email" >
+      <mat-error *ngIf="email?.errors?.['required']">
+        Email is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Password"
+        formControlName="password">
+      <mat-error *ngIf="password?.errors?.['required']">
+        Password is required >= 6 digit/letter
+      </mat-error>
+    </mat-form-field>
+    <div class="center margin-top">
+      <button class="button-full" mat-raised-button color="primary">Login</button>
+    </div>
+
+    <span class="center margin-top">New to our platform?
+      <a  class="sign-up-link" routerLink="/sign-up">Sign up!</a></span>
+  </form>
+</div>
+
+<div class="margin-top" *ngIf="authService.loggedIn$ | async">
+  <button mat-stroked-button (click)="authService.logout()">LOGOUT12</button>
+</div>

@@ -1,1 +1,128 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use 'node_modules/@ngneat/hot-toast/src/styles/styles.scss';
+
+// Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Pattaya&family=Thasadith&family=Sarabun&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap');
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Prompt", sans-serif; }
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+/* Mat table */
+.mat-sort-header-content, .mat-mdc-header-cell {
+  font-family: 'Prompt', sans-serif !important;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+//.mat-mdc-table tbody,
+//.mat-mdc-table tfoot,
+//.mat-mdc-table thead,
+//.mat-mdc-cell,
+//.mat-mdc-footer-cell,
+//.mat-mdc-header-row,
+//.mat-mdc-row,
+//.mat-mdc-footer-row,
+.mat-mdc-table .mat-mdc-header-cell {
+  background: #ede8e8 !important;
+}
+
+.mat-mdc-table .mat-mdc-row:hover {
+  cursor: pointer;
+  background: #f4f0f0 !important;
+}
+
+.mdc-data-table__cell {
+  font-family: 'Sarabun', sans-serif;
+  font-size: 16px;
+}
+
+.cell-align {
+  text-align: center;
+  vertical-align: middle;
+  padding: 5px;
+}
+
+.prompt-font {
+  font-family: 'Prompt', sans-serif;
+}
+
+/** login form */
+.form-container {
+  display: block;
+  max-width: 300px;
+  margin: auto;
+
+  background: #eceff1;
+  padding: 48px;
+  border-radius: 15px;
+}
+
+.form-container mat-form-field  {
+  width: 100%;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.end {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.margin-top {
+  margin-top: 16px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.button-full {
+  width: 100%;
+}
+
+.search-form-field {
+  width: 60%;
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+.search-div {
+  margin: 10px;
+}
+
+.sarabun {
+  font-family: 'Sarabun', sans-serif;
+}
+
+.red {
+  color: #ff0000;
+}
+
+.blue {
+  color: #0000ff;
+}
+
+/* for dialog pop-up */
+.btn-dialog-close {
+  width: 40px;
+  min-width: 0 !important;
+  height: 40px;
+  padding: 0 !important;
+}
+
+/*form.normal-form {
+  margin: 10px;
+}*/
