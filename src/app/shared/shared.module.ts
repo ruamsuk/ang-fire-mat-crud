@@ -5,10 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ThaiDatepickerModule } from '../thai-datepicker/thai-datepicker.module';
 import { ThaiDatePipe } from '../pipe/thai-date.pipe';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { DateThaiPipe } from '../pipe/date-thai.pipe';
 
 @NgModule({
   declarations: [
     ThaiDatePipe,
+    DateThaiPipe,
     ConfirmDialogComponent
   ],
   imports: [
