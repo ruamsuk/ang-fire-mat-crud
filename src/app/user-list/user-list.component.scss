@@ -1,0 +1,32 @@
+table {
+  width: 100%;
+}
+
+/*.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}*/
+
+.main-body {
+  padding-top: 20px;
+  margin: 0 auto;
+  max-width: 1400px;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.mat-column-id {
+  width: 5%;
+}
+.mat-column-email,
+.mat-column-password,
+.mat-column-name {
+  width: 20%;
+}

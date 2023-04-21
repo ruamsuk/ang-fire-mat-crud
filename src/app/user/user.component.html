@@ -1,0 +1,31 @@
+<mat-toolbar>
+  <span class="{{service.form.controls['id'].value ? 'red' : 'blue'}}">
+    {{service.form.controls['id'].value ? 'Modify User' : 'New User'}}
+  </span>
+  <span>
+    <button mat-stroked-button class="btn-dialog-close" (click)="onClose()" tabindex="-1">
+            <mat-icon class="mat-18">clear</mat-icon>
+        </button>
+  </span>
+</mat-toolbar>
+
+<div class="form-container">
+  <form [formGroup]="service.form" (ngSubmit)="submit()" class="normal-form">
+    <div>
+      <input type="hidden" formControlName="id">
+      <mat-form-field>
+        <input matInput placeholder="Name" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Password" formControlName="password" />
+      </mat-form-field>
+    </div>
+    <div class="end">
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="warn" (click)="onClose()">Clear</button>
+    </div>
+  </form>
+</div>
