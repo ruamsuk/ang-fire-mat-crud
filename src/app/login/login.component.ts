@@ -14,6 +14,7 @@ export class LoginComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
+  hide = true;
 
   constructor(
     public authService: AuthService,
@@ -50,6 +51,17 @@ export class LoginComponent {
         this.router.navigate(['user-list']).catch();
       });
 
+  }
+
+  onKeyup(event: KeyboardEvent) {
+    if (this.loginForm.invalid) {
+      return;
+    }
+    if (event.key !== undefined) {
+      if (event.key == 'Enter') {
+        this.submit();
+      }
+    }
   }
 
 }

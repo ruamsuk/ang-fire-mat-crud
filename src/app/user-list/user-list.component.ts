@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Router } from '@angular/router';
@@ -10,15 +10,17 @@ import { User } from '../models/user.model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserComponent } from '../user/user.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'email', 'password', 'name', 'key'];
+export class UserListComponent implements AfterViewInit, OnDestroy {
+  displayedColumns: string[] = ['id', 'name', 'email', 'password', 'key'];
   dataSource!: MatTableDataSource<User>;
+  subscribe!: Subscription;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -48,7 +50,7 @@ export class UserListComponent implements AfterViewInit {
   }
 
   getUsers() {
-    this.userService.loadUsers()
+    this.subscribe = this.userService.loadUsers()
       .pipe(
         this.toast.observe({
           success: 'Load user successfully',
@@ -65,6 +67,10 @@ export class UserListComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  ngOnDestroy() {
+    if (this.subscribe) this.subscribe.unsubscribe();
   }
 
   applyFilter(event: Event) {

@@ -1,0 +1,8 @@
+.icon:hover {
+  cursor: pointer;
+}
+
+:host ::ng-deep .mat-tooltip {
+  background: red !important;
+  font-size: 12px;
+}

@@ -31,7 +31,10 @@ export class UserService {
   populateForm(user: any) {
     if (user.id) {
       this.form.setValue({
-        ...user
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        password: user.password,
       })
     } else {
       this.form.reset();
@@ -46,14 +49,21 @@ export class UserService {
 
   addUser(user: User) {
     const collectionInstance = collection(this.fireStore, 'users');
+    const { id} = doc(collectionInstance);
+    const userData = {
+      ...user,
+      id: id,
+      created: new Date(),
+      modify: new Date()
+    };
 
-    return from(addDoc(collectionInstance, user));
+    return from(addDoc(collectionInstance, userData));
   }
 
   updateUser(data: any) {
     const docInstance = doc(this.fireStore, 'users', data.id);
     const updateData = {
-      ...data
+      ...data, modify: new Date()
     }
     return from(updateDoc(docInstance, updateData));
 

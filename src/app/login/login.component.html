@@ -5,29 +5,45 @@
       <input
         matInput
         placeholder="Email address"
-        formControlName="email" >
+        formControlName="email"
+        autocomplete="off">
+      <button
+        mat-icon-button
+        matSuffix><mat-icon>email</mat-icon>
+      </button>
       <mat-error *ngIf="email?.errors?.['required']">
         Email is required
       </mat-error>
     </mat-form-field>
     <mat-form-field>
       <input
+        [type]="hide ? 'password' : 'text'"
         matInput
         placeholder="Password"
-        formControlName="password">
+        formControlName="password"
+        autocomplete="off"
+        (keyup)="onKeyup($event)">
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
       <mat-error *ngIf="password?.errors?.['required']">
         Password is required >= 6 digit/letter
       </mat-error>
     </mat-form-field>
     <div class="center margin-top">
-      <button class="button-full" mat-raised-button color="primary">Login</button>
+      <button
+        class="button-full"
+        mat-raised-button
+        color="primary" [disabled]="loginForm.invalid">Login</button>
     </div>
 
-    <span class="center margin-top">New to our platform?
-      <a  class="sign-up-link" routerLink="/sign-up">Sign up!</a></span>
+    <span class="center margin-top">New to our platform?&nbsp;
+      <a class="sign-up-link" routerLink="/sign-up">Sign up!</a></span>
   </form>
 </div>
 
-<div class="margin-top" *ngIf="authService.loggedIn$ | async">
-  <button mat-stroked-button (click)="authService.logout()">LOGOUT12</button>
-</div>

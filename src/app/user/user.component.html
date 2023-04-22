@@ -3,8 +3,8 @@
     {{service.form.controls['id'].value ? 'Modify User' : 'New User'}}
   </span>
   <span>
-    <button mat-stroked-button class="btn-dialog-close" (click)="onClose()" tabindex="-1">
-            <mat-icon class="mat-18">clear</mat-icon>
+    <button mat-icon-button class="btn-dialog-close" (click)="onClose()" tabindex="-1">
+            <mat-icon class="material-icons mat-18">clear</mat-icon>
         </button>
   </span>
 </mat-toolbar>
@@ -14,13 +14,31 @@
     <div>
       <input type="hidden" formControlName="id">
       <mat-form-field>
-        <input matInput placeholder="Name" formControlName="name" />
+        <input
+          matInput
+          placeholder="Name"
+          formControlName="name" />
+        <button mat-icon-button matSuffix>
+          <mat-icon class="material-icons md-24">person_2</mat-icon>
+        </button>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Email" formControlName="email" />
+        <input
+          matInput
+          placeholder="Email"
+          formControlName="email" />
+        <button mat-icon-button matSuffix>
+          <mat-icon class="material-icons md-dark">email</mat-icon>
+        </button>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Password" formControlName="password" />
+        <input
+          matInput
+          placeholder="Password"
+          formControlName="password" />
+        <button mat-icon-button matSuffix>
+          <mat-icon class="material-icons md-24">lock</mat-icon>
+        </button>
       </mat-form-field>
     </div>
     <div class="end">
