@@ -4,6 +4,8 @@ import { LoginComponent } from './login/login.component';
 import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 import { redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { UserListComponent } from './user-list/user-list.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -15,6 +17,14 @@ const routes: Routes = [
     path: 'user-list', component: UserListComponent,
     canActivate: [AngularFireAuthGuard],
     data: {authGuardPipe: () => redirectUnauthorizedTo(['login'])}
+  },
+  {
+    path: 'profile', component: ProfileComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: () => redirectUnauthorizedTo(['login'])}
+  },
+  {
+    path: 'sign-up', component: SignUpComponent
   },
   {
     path: '', redirectTo: 'login', pathMatch: 'full'

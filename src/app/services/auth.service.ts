@@ -1,11 +1,20 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, from, Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  concatMap,
+  from,
+  Observable,
+  of,
+  switchMap
+} from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   Auth, authState,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  UserCredential
+  updateProfile,
+  UserCredential,
+  UserInfo
 } from '@angular/fire/auth';
 
 @Injectable({
@@ -30,8 +39,11 @@ export class AuthService {
     }).then();
   }
 
-  signUp(email: string, password: string): Observable<UserCredential> {
-    return from(createUserWithEmailAndPassword(this.auth, email, password));
+  signUp(name: string | null | undefined, email: string | null | undefined, password: string | null | undefined): Observable<UserCredential> {
+    // @ts-ignore
+    return from(createUserWithEmailAndPassword(this.auth, <string>email, <string>password))
+      .pipe(switchMap(({ user }) => updateProfile(user, { displayName: name }))
+      )
   }
 
   login(email: string, password: string): Observable<any> {
@@ -40,6 +52,16 @@ export class AuthService {
 
   login_(email: string | null, password: string | null) {
     return from(this.afAuth.signInWithEmailAndPassword(<string>email, <string>password));
+  }
+
+  updateProfileData(profileData: Partial<UserInfo>) {
+    const user = this.auth.currentUser;
+    return of(user).pipe(
+      concatMap((user) => {
+        if (!user) throw new Error('Not Authenticates');
+        return updateProfile(user, profileData);
+      })
+    );
   }
 
 

@@ -1,18 +1,26 @@
 <mat-toolbar color="primary">
   Wathana web-app
+
   <ng-container *ngIf="auth.currentUser$ | async as user">
     <button mat-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>account_circle</mat-icon>
+        {{user.displayName}}
+      <span>
+        <mat-icon class="material-icons">expand_more</mat-icon>
+      </span>
+
+    </button>
+    <!--<button mat-button [matMenuTriggerFor]="userMenu">
       <img
         width="30"
         height="30"
-        align="middle"
         class="profile-image-toolbar"
         [ngSrc]="user.photoURL ?? 'assets/images/dummy-user.png'"
        alt="photo" />
       {{ user.displayName || user.email }}
 
       <span><mat-icon>expand_more</mat-icon></span>
-    </button>
+    </button>-->
   </ng-container>
 </mat-toolbar>
 
@@ -21,7 +29,7 @@
 </div>
 
 <mat-menu #userMenu="matMenu">
-  <button mat-menu-item>
+  <button mat-menu-item routerLink="/profile">
     <mat-icon>account_circle</mat-icon>
     Profile
   </button>

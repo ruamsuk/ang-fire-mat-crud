@@ -36,7 +36,7 @@ export class UserListComponent implements AfterViewInit, OnDestroy {
     this.getUsers();
     this.dataSource = new MatTableDataSource<User>();
   }
-
+/*
   logout() {
     this.auth.logout().pipe(
       this.toast.observe({
@@ -47,7 +47,7 @@ export class UserListComponent implements AfterViewInit, OnDestroy {
     ).subscribe(
       () => this.router.navigate(['login'])
     );
-  }
+  }*/
 
   getUsers() {
     this.subscribe = this.userService.loadUsers()

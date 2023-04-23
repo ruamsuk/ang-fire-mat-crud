@@ -15,6 +15,9 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { NgOptimizedImage } from '@angular/common';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,8 @@ import { NgOptimizedImage } from '@angular/common';
     LoginComponent,
     UserComponent,
     UserListComponent,
+    SignUpComponent,
+    ProfileComponent,
   ],
   imports: [
     SharedModule,
@@ -29,6 +34,7 @@ import { NgOptimizedImage } from '@angular/common';
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
     HotToastModule.forRoot(),
     BrowserAnimationsModule,

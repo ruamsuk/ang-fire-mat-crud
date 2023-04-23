@@ -1,0 +1,94 @@
+
+<div class="form-container margin-top mat-elevation-z5">
+  <h1>Sign Up a New user</h1>
+  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        placeholder="Name"
+        formControlName="name"
+        autocomplete="off" required>
+      <button
+        mat-icon-button
+        matSuffix><mat-icon>person_2</mat-icon>
+      </button>
+      <mat-error *ngIf="name?.errors?.['required']">
+        Name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="Email address"
+        formControlName="email"
+        autocomplete="off" required>
+      <button
+        mat-icon-button
+        matSuffix><mat-icon>email</mat-icon>
+      </button>
+      <mat-error *ngIf="email?.errors?.['required']">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="email?.errors?.['email']">
+        Please enter a correct email format
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        [type]="hide ? 'password' : 'text'"
+        matInput
+        placeholder="Password"
+        formControlName="password"
+        autocomplete="off"
+        (keyup)="onKeyup($event)" required>
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="password?.errors?.['required']">
+        Password is required >= 6 digit/letter
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input
+        [type]="hide ? 'password' : 'text'"
+        matInput
+        placeholder="Confirm Password"
+        formControlName="confirmPassword"
+        autocomplete="off"
+        (keyup)="onKeyup($event)" required>
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="confirmPassword?.errors?.['required']">
+        Confirm Password is required
+      </mat-error>
+    </mat-form-field>
+    <mat-error *ngIf="signUpForm.errors?.['passwordsDontMatch']">
+      Passwords should match
+    </mat-error>
+    <div class="center margin-top">
+      <button
+        class="button-full"
+        mat-raised-button
+        color="primary" [disabled]="signUpForm.invalid">SignUp</button>
+    </div>
+
+    <span class="center margin-top">Already have an account?&nbsp;
+      <a class="sign-up-link" routerLink="/login">login!</a></span>
+  </form>
+</div>
+
