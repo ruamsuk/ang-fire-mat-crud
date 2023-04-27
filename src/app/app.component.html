@@ -6,10 +6,12 @@
       <img
         width="40"
         height="40"
-        align="middle"
         class="profile-image-toolbar"
         [ngSrc]="user.photoURL ?? 'assets/images/dummy-user.png'" alt="photo"/>
-      {{user.displayName}}
+      <span class="sarabun">
+        {{user.displayName}}
+      </span>
+
       <span>
         <mat-icon class="material-icons">expand_more</mat-icon>
       </span>
