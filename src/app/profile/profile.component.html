@@ -12,29 +12,29 @@
       <mat-icon class="material-icons">edit</mat-icon>
     </button>
   </div>
-  <input #inputField type="file" hidden="hidden" (change)="uploadImage($event, user)" />
+  <input #inputField type="file" hidden="hidden" (change)="uploadImage($event)" />
   <form class="margin-top" [formGroup]="profileForm" (ngSubmit)="saveProfile()">
     <input type="text" hidden="hidden" formControlName="uid">
     <div class="row">
       <mat-form-field>
-        <input matInput formControlName="firstName" placeholder="First name"/>
+        <input matInput formControlName="displayName" placeholder="DisplayName"/>
       </mat-form-field>
       <mat-form-field>
-        <input matInput formControlName="lastName" placeholder="Last name"/>
+        <input matInput formControlName="email" placeholder="Email"/>
       </mat-form-field>
     </div>
     <div class="row">
       <mat-form-field>
-        <input matInput formControlName="displayName" placeholder="Display name"/>
+        <input matInput formControlName="phoneNumber" placeholder="Phone Number"/>
       </mat-form-field>
-      <mat-form-field>
+      <!--<mat-form-field>
         <input matInput formControlName="phone" placeholder="phone number"/>
       </mat-form-field>
-    </div>
+
     <mat-form-field>
       <input matInput formControlName="address" placeholder="Address"/>
-    </mat-form-field>
-
+    </mat-form-field>-->
+    </div>
     <button
       type="submit"
       class="margin-top button-full"

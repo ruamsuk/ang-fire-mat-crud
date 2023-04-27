@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
-  FormGroup,
   ValidationErrors,
   ValidatorFn,
   Validators
@@ -11,6 +9,8 @@ import {
 import { AuthService } from '../services/auth.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Router } from '@angular/router';
+import { switchMap } from 'rxjs';
+import { UserService } from '../services/user.service';
 
 export function passwordMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -46,6 +46,7 @@ export class SignUpComponent {
 
   constructor(
     private authService: AuthService,
+    private userService: UserService,
     private toast: HotToastService,
     private router: Router,
     private fb: FormBuilder
@@ -71,18 +72,21 @@ export class SignUpComponent {
   onSubmit() {
     if (this.signUpForm.invalid) return;
 
-      const {name, email, password, confirmPassword} = this.signUpForm.value;
+    const {name, email, password, confirmPassword} = this.signUpForm.value;
 
-      this.authService
-        .signUp(name, email, password)
-        .pipe(
-          this.toast.observe({
-            loading: 'loading...',
-            success: 'Congrats SignUp Successfully.',
-            error: ({ message }) => `${message}`
-          })
-        )
-        .subscribe(() => this.router.navigate(['login']))
+    this.authService
+      .signUp(name, email, password)
+      .pipe(
+        this.toast.observe({
+          loading: 'loading...',
+          success: 'Congrats SignUp Successfully.',
+          error: ({message}) => `${message}`
+        })
+      ).subscribe((res) => {
+      this.authService.currentUser$.subscribe((data) => console.log(data))
+      this.router.navigate(['/']).catch();
+    });
+
 
   }
 

@@ -1,10 +1,12 @@
 export interface UserProfile {
   uid: string;
-  email?: string;
   displayName?: string;
+  email?: string;
+  emailVerified?: boolean;
   photoURL?: string;
-  firstName?: string;
+  phoneNumber?: string;
+  /*firstName?: string;
   lastName?: string;
   phone?: string;
-  address?: string;
+  address?: string;*/
 }

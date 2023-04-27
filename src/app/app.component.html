@@ -3,24 +3,17 @@
 
   <ng-container *ngIf="auth.currentUser$ | async as user">
     <button mat-button [matMenuTriggerFor]="userMenu">
-      <mat-icon>account_circle</mat-icon>
-        {{user.displayName}}
+      <img
+        width="40"
+        height="40"
+        align="middle"
+        class="profile-image-toolbar"
+        [ngSrc]="user.photoURL ?? 'assets/images/dummy-user.png'" alt="photo"/>
+      {{user.displayName}}
       <span>
         <mat-icon class="material-icons">expand_more</mat-icon>
       </span>
-
     </button>
-    <!--<button mat-button [matMenuTriggerFor]="userMenu">
-      <img
-        width="30"
-        height="30"
-        class="profile-image-toolbar"
-        [ngSrc]="user.photoURL ?? 'assets/images/dummy-user.png'"
-       alt="photo" />
-      {{ user.displayName || user.email }}
-
-      <span><mat-icon>expand_more</mat-icon></span>
-    </button>-->
   </ng-container>
 </mat-toolbar>
 
@@ -32,6 +25,10 @@
   <button mat-menu-item routerLink="/profile">
     <mat-icon>account_circle</mat-icon>
     Profile
+  </button>
+  <button mat-menu-item routerLink="/user-list">
+    <mat-icon>list</mat-icon>
+    User List
   </button>
   <button (click)="logout()" mat-menu-item>
     <mat-icon>logout</mat-icon>

@@ -1,51 +1,77 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import { ImageUploadService } from '../services/image-upload.service';
 import { User } from '@angular/fire/auth';
-import { concatMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
+import { UserService } from '../services/user.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   user$ = this.authService.currentUser$;
 
   profileForm = new FormGroup({
     uid: new FormControl(''),
     displayName: new FormControl(''),
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    phone: new FormControl(''),
-    address: new FormControl(''),
+    email: new FormControl(''),
+    phoneNumber: new FormControl(''),
   });
+  private user!: User | null;
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
+    private userService: UserService,
+    private afAuth: AngularFireAuth,
     private imageUploadService: ImageUploadService,
     private toast: HotToastService
-  ) { }
+  ) {
+  }
 
-  uploadImage(event: any, user: User) {
+  ngOnInit() {
+    this.authService.currentUser$
+      .subscribe((res) => {
+        this.profileForm.patchValue({...res});
+        this.user = res;
+      });
+  }
+
+  uploadImage(event: any) {
+    const uid = this.user?.uid;
+
     this.imageUploadService
-      .uploadImage(event.target.files[0], `images/profile/${user.uid}`)
+      .uploadImage(event.target.files[0], `images/profile/${uid}`)
       .pipe(
         this.toast.observe({
           loading: 'loading...',
           success: 'Image Uploaded',
-          error: ({ message }) => `${message}`
+          error: ({message}) => `${message}`
         }),
-        concatMap((photoURL) =>
-          this.authService.updateProfileData({ photoURL})
+        // @ts-ignore
+        switchMap((photoURL) => {
+            this.userService.upDateUser({
+              uid, photoURL
+            });
+          }
         )
-      )
-      .subscribe();
+      ).subscribe();
+
   }
 
   saveProfile() {
-
+    const profileData = this.profileForm.value;
+    this.userService.upDateUser(profileData)
+      .pipe(
+        this.toast.observe({
+          loading: 'loading...',
+          success: 'Updated User Profile Success',
+          error: ({message}) => `${message}`
+        })
+      ).subscribe();
   }
 }

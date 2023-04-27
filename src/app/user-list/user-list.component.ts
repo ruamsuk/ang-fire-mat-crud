@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { HotToastService } from '@ngneat/hot-toast';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -31,23 +31,11 @@ export class UserListComponent implements AfterViewInit, OnDestroy {
     private userService: UserService,
     private toast: HotToastService,
     private dialog: MatDialog,
-    private router: Router
+    // private router: Router
   ) {
     this.getUsers();
     this.dataSource = new MatTableDataSource<User>();
   }
-/*
-  logout() {
-    this.auth.logout().pipe(
-      this.toast.observe({
-        success: 'Logged Out successfully',
-        loading: 'Logging Out...',
-        error: 'There was an error'
-      })
-    ).subscribe(
-      () => this.router.navigate(['login'])
-    );
-  }*/
 
   getUsers() {
     this.subscribe = this.userService.loadUsers()
